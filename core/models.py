@@ -4,16 +4,21 @@ from django.db import models
 # Create your models here.
 
 class Player(models.Model):
-    is_host = models.BooleanField()
+    is_host = models.BooleanField(default=False)
     name = models.CharField(max_length=30)
-    player_number = models.IntegerField()
-    question1 = models.BooleanField()
-    question2 = models.BooleanField()
-    question3 = models.BooleanField()
-    question4 = models.BooleanField()
-    question5 = models.BooleanField()
-    question6 = models.BooleanField()
-    question7 = models.BooleanField()
-    question8 = models.BooleanField()
-    question9 = models.BooleanField()
-    question10 = models.BooleanField()
+    host_number = models.IntegerField(default=0)
+    question1 = models.BooleanField(default=False)
+    question2 = models.BooleanField(default=False)
+    question3 = models.BooleanField(default=False)
+    question4 = models.BooleanField(default=False)
+    question5 = models.BooleanField(default=False)
+    question6 = models.BooleanField(default=False)
+    question7 = models.BooleanField(default=False)
+    question8 = models.BooleanField(default=False)
+    question9 = models.BooleanField(default=False)
+    question10 = models.BooleanField(default=False)
+    current_question = models.IntegerField(default=1)
+    score = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.name} {self.is_host} {self.host_number}'

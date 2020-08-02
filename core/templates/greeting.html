@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'create_user' %}" method="post">
+    {% csrf_token %}
+    <div>당신의 이름은?</div>
+    <input type="text" name="name"/>
+    <input type="hidden" value="{{ is_host }}" name="is_host">
+    <div>is_host: {{ is_host }}</div>
+    {% if host_number %}
+        <input type="hidden" value="{{ host_number }}" name="host_number">
+    {% endif %}
+    <input type="submit" value="시작하기"/>
+</form>
+</body>
+</html>

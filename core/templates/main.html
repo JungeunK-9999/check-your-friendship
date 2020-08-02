@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'starting' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" value="False" name="is_host">
+    <div>친구의 코드를 입력해주세요</div>
+    <input type="text" name="host_number"/>
+    <input type="submit" value="퀴즈 풀기"/>
+</form>
+<form action="{% url 'starting' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" value="True" name="is_host">
+    <input type="submit" value="나도 퀴즈 만들기"/>
+</form>
+</body>
+</html>
