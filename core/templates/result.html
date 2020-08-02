@@ -11,8 +11,14 @@
     <p>아래 코드를 친구에게 보내 보세요</p>
     <p>{{ player.host_number }}</p>
 {% endif %}
-{% if guest %}
+{% if is_guest %}
     <p>{{ player.name }}님의 점수는 {{ player.score }}점 입니다.</p>
 {% endif %}
+
+{% for guest in guests %}
+    <div>
+    {{ guest.name }}: {{ guest.score }}
+    </div>
+{% endfor %}
 </body>
 </html>

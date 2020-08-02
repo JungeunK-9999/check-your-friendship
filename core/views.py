@@ -21,7 +21,7 @@ def create_user(request):
     player = Player.objects.create(name=request.POST['name'])
     if request.POST['is_host'] == 'True':
         player.is_host = True
-        player.host_number = player.id
+        player.host_number = -1
     else:
         player.host_number = int(request.POST['host_number'])
     player.save()
@@ -79,30 +79,44 @@ def check(request, pk):
     player.save()
 
     if player.current_question > 10:
-        if player.is_host == False:
-            host = get_object_or_404(Player, id=player.host_number)
-
-            if host.question1 == player.question1:
-                player.score += 1
-            if host.question2 == player.question2:
-                player.score += 1
-            if host.question3 == player.question3:
-                player.score += 1
-            if host.question4 == player.question4:
-                player.score += 1
-            if host.question5 == player.question5:
-                player.score += 1
-            if host.question6 == player.question6:
-                player.score += 1
-            if host.question7 == player.question7:
-                player.score += 1
-            if host.question8 == player.question8:
-                player.score += 1
-            if host.question9 == player.question9:
-                player.score += 1
-            if host.question10 == player.question10:
-                player.score += 1
-            player.save()
-        return render(request, 'result.html', {'player': player, 'guest': not (player.is_host)})
+        return redirect('result', player.id)
 
     return quiz(request, pk)
+
+
+def result(request, pk):
+    player = get_object_or_404(Player, id=pk)
+    if player.is_host == False:
+        host = get_object_or_404(Player, id=player.host_number)
+
+        if host.question1 == player.question1:
+            player.score += 1
+        if host.question2 == player.question2:
+            player.score += 1
+        if host.question3 == player.question3:
+            player.score += 1
+        if host.question4 == player.question4:
+            player.score += 1
+        if host.question5 == player.question5:
+            player.score += 1
+        if host.question6 == player.question6:
+            player.score += 1
+        if host.question7 == player.question7:
+            player.score += 1
+        if host.question8 == player.question8:
+            player.score += 1
+        if host.question9 == player.question9:
+            player.score += 1
+        if host.question10 == player.question10:
+            player.score += 1
+        player.save()
+
+    guests = Player.objects.filter(host_number=player.host_number).order_by('-score')
+
+    ctx = {
+        'player': player,
+        'is_guest': not (player.is_host),
+        'guests': guests
+    }
+
+    return render(request, 'result.html', ctx)
