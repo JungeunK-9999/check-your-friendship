@@ -38,6 +38,7 @@ def quiz(request, pk):
         'current_question': current_question,
         'false': question['false'],
         'true': question['true'],
+
     }
     player.save()
     return render(request, 'quiz.html', ctx)
