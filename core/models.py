@@ -18,6 +18,7 @@ class Player(models.Model):
     question9 = models.BooleanField(default=False)
     question10 = models.BooleanField(default=False)
     current_question = models.IntegerField(default=1)
+    score = models.IntegerField(default=0)
 
     def __str__(self):
         return f'{self.name} {self.is_host} {self.host_number}'

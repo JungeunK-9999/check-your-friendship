@@ -12,8 +12,7 @@ def starting(request):
             host_number = request.POST['host_number']
             return render(request, 'greeting.html',
                           {'is_host': request.POST['is_host'],
-                           'host_number': host_number
-                           }
+                           'host_number': host_number}
                           )
     return render(request, 'main.html')
 
@@ -80,6 +79,30 @@ def check(request, pk):
     player.save()
 
     if player.current_question > 10:
-        return render(request, 'result.html', {'player': player})
+        if player.is_host == False:
+            host = get_object_or_404(Player, id=player.host_number)
+
+            if host.question1 == player.question1:
+                player.score += 1
+            if host.question2 == player.question2:
+                player.score += 1
+            if host.question3 == player.question3:
+                player.score += 1
+            if host.question4 == player.question4:
+                player.score += 1
+            if host.question5 == player.question5:
+                player.score += 1
+            if host.question6 == player.question6:
+                player.score += 1
+            if host.question7 == player.question7:
+                player.score += 1
+            if host.question8 == player.question8:
+                player.score += 1
+            if host.question9 == player.question9:
+                player.score += 1
+            if host.question10 == player.question10:
+                player.score += 1
+            player.save()
+        return render(request, 'result.html', {'player': player, 'guest': not (player.is_host)})
 
     return quiz(request, pk)
