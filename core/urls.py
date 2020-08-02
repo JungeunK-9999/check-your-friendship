@@ -3,6 +3,7 @@ from core import views
 
 urlpatterns = [
     path('', views.starting, name='starting'),
-    # path('greeting/', views.greeting, name='greeting'),
-    path('quiz/', views.quiz, name='quiz'),
+    path('create_user/', views.create_user, name='create_user'),
+    path('create_user/quiz/<int:pk>', views.quiz, name='quiz'),
+    path('check/<int:pk>', views.check, name='check')
 ]

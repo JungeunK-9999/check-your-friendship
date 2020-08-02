@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,5 +7,25 @@
 </head>
 <body>
 <h2>QUIZ</h2>
+{{ player.name }} is_host: {{ player.is_host }}
+<h3>질문번호: {{ current_question }}</h3>
+<form method="post" action="{% url 'check' pk=player.id %}">
+    {% csrf_token %}
+    <input type="hidden" name="choice" value="False">
+    <button type="submit">
+        <img src="{% static 'false/' %}{{ current_question }}.jpg" alt="선택지1"
+             style="width: 250px; height: 300px;">
+        <p>{{ false }}</p>
+    </button>
+</form>
+<form method="post" action="{% url 'check' pk=player.id %}">
+    {% csrf_token %}
+    <input type="hidden" name="choice" value="True">
+    <button type="submit">
+        <img src="{% static 'true/' %}{{ current_question }}.jpg" alt="선택지2"
+             style="width: 250px; height: 300px;">
+        <p>{{ true }}</p>
+    </button>
+</form>
 </body>
 </html>

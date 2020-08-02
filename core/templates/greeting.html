@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="{% url 'quiz' %}" method="post">
+<form action="{% url 'create_user' %}" method="post">
     {% csrf_token %}
     <div>당신의 이름은?</div>
     <input type="text" name="name"/>
