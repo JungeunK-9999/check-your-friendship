@@ -6,5 +6,27 @@
 </head>
 <body>
 <h2>QUIZ</h2>
+{{ player.name }} is_host: {{ player.is_host }}
+<h3>질문번호: {{ current_question }}</h3>
+<form method="post" action="{% url 'check' pk=player.id %}">
+    {% csrf_token %}
+    <input type="hidden" name="choice" value="False">
+    <button type="submit">
+        <div>
+            <img src="" alt="선택지1">
+            <p>선택지1</p>
+        </div>
+    </button>
+</form>
+<form method="post" action="{% url 'check' pk=player.id %}">
+    {% csrf_token %}
+    <input type="hidden" name="choice" value="True">
+    <button type="submit">
+        <div>
+            <img src="" alt="선택지2">
+            <p>선택지2</p>
+        </div>
+    </button>
+</form>
 </body>
 </html>
