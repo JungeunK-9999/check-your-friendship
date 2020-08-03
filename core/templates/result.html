@@ -13,7 +13,7 @@
         <div class="col-8">
             {% if player.is_host %}
                 <p>아래 코드를 친구에게 보내 보세요</p>
-                <p>{{ player.id }}</p>
+                <p>http://localhost:8000/guess_me/{{ player.id }}</p>
             {% endif %}
             {% for guest in guests %}
                 <div>

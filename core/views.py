@@ -18,6 +18,13 @@ def starting(request):
     return render(request, 'main.html')
 
 
+def invitation(request, pk):
+    ctx = {}
+    ctx['is_host'] = False
+    ctx['host_number'] = pk
+    return render(request, 'greeting.html', ctx)
+
+
 def create_user(request):
     player = Player.objects.create(name=request.POST['name'])
     if request.POST['is_host'] == 'True':
