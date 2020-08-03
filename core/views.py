@@ -111,7 +111,10 @@ def result(request, pk):
             player.score += 1
         player.save()
 
-    guests = Player.objects.filter(host_number=player.host_number).order_by('-score')
+    if player.is_host:
+        guests = {}
+    else:
+        guests = Player.objects.filter(host_number=player.host_number).order_by('-score')
 
     ctx = {
         'player': player,

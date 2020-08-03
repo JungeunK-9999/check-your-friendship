@@ -1,24 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h2>result 페이지</h2>
-{% if player.is_host %}
-    <p>{{ player.name }}님의 퀴즈가 완성되었습니다!</p>
-    <p>아래 코드를 친구에게 보내 보세요</p>
-    <p>{{ player.host_number }}</p>
-{% endif %}
-{% if is_guest %}
-    <p>{{ player.name }}님의 점수는 {{ player.score }}점 입니다.</p>
-{% endif %}
-
-{% for guest in guests %}
-    <div>
-    {{ guest.name }}: {{ guest.score }}
+{% extends '_layout.html' %}
+{% block header %}
+    {% if player.is_host %}
+        {{ player.name }}님의 퀴즈가 완성되었습니다!
+    {% endif %}
+    {% if is_guest %}
+        {{ player.name }}님의 점수는 {{ player.score }}점 입니다.
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            {% if player.is_host %}
+                <p>아래 코드를 친구에게 보내 보세요</p>
+                <p>{{ player.id }}</p>
+            {% endif %}
+            {% for guest in guests %}
+                <div>
+                    {{ guest.name }}: {{ guest.score }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-2"></div>
     </div>
-{% endfor %}
-</body>
-</html>
+{% endblock %}

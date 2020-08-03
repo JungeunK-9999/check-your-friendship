@@ -1,20 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form action="{% url 'create_user' %}" method="post">
-    {% csrf_token %}
-    <div>당신의 이름은?</div>
-    <input type="text" name="name"/>
-    <input type="hidden" value="{{ is_host }}" name="is_host">
-    <div>is_host: {{ is_host }}</div>
-    {% if host_number %}
-        <input type="hidden" value="{{ host_number }}" name="host_number">
-    {% endif %}
-    <input type="submit" value="시작하기"/>
-</form>
-</body>
-</html>
+{% extends '_layout.html' %}
+{% block header %}
+    당신의 이름은?
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <form action="{% url 'create_user' %}" method="post">
+                {% csrf_token %}
+                <input class="block-center" type="text" name="name"/>
+                <input type="hidden" value="{{ is_host }}" name="is_host">
+                {% if host_number %}
+                    <input type="hidden" value="{{ host_number }}" name="host_number">
+                {% endif %}
+                <input type="submit" value="시작하기"/>
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+{% endblock %}
