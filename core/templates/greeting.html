@@ -9,7 +9,7 @@
             <form action="{% url 'create_user' %}" method="post">
                 {% csrf_token %}
                 <input class="block-center" type="text" name="name"/>
-                <input type="hidden" value="{{ is_host }}" name="is_host">
+                <input type="hidden" value="{{ is_host }}" name="is_host"/>
                 {% if host_number %}
                     <input type="hidden" value="{{ host_number }}" name="host_number">
                 {% endif %}
